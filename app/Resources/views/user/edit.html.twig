@@ -1,0 +1,20 @@
+{% extends 'layout.html.twig' %}
+{% form_theme edit_form 'bootstrap_3_horizontal_layout.html.twig' %}
+{% block body %}
+    <h1 class="centered">EDYTUJ BARBERA</h1>
+    <hr/>
+    <br/>
+
+    {{ form_start(edit_form) }}
+    {{ form_widget(edit_form) }}
+    <input class="btn btn-success pull-right m-l-1"  type="submit" value="Zapisz"/>
+    {{ form_end(edit_form) }}
+
+    <a class="btn btn-info pull-right m-l-1" href="{{ path('admin_user_index') }}">Powrót do listy</a>
+
+    {% if user.enabled %}
+        {{ form_start(delete_form) }}
+        <input class="btn btn-danger pull-right m-l-1" type="submit" value="Zablokuj dostęp">
+        {{ form_end(delete_form) }}
+    {% endif %}
+{% endblock %}

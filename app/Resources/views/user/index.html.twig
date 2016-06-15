@@ -1,0 +1,30 @@
+{% extends 'layout.html.twig' %}
+
+{% block body %}
+    <h1 class="centered">BARBERZY</h1>
+    <hr/>
+    <br/>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Barber</th>
+                <th>Aktywny</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for user in users %}
+            <tr>
+                <td>{{ user.username }}</td>
+                <td>{% if user.enabled %}Aktywny{% else %}Nieaktywny{% endif %}</td>
+                <td style="width:30px;">
+                    <a class="btn btn-success btn-sm" href="{{ path('admin_user_edit', { 'id': user.id }) }}">edit</a>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a class="btn btn-info" href="{{ path('admin_user_new') }}">Dodaj barbera</a>
+{% endblock %}

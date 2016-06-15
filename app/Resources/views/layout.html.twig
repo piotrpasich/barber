@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8"/>
+    <title>{% block title %}Barberownia!{% endblock %}</title>
+    {% block stylesheets %}{% endblock %}
+    <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}"/>
+    {% javascripts '@twbs_js_and_jq' %}
+    <script src="{{ asset_url }}"></script>
+    {% endjavascripts %}
+
+    {% stylesheets
+        '@twbs_css'
+        '@BarberBundle/Resources/public/css/barber.css'
+        filter='cssrewrite' %}
+        <link rel="stylesheet" href="{{ asset_url }}"/>
+    {% endstylesheets %}
+    {% stylesheets
+        'shield/css/main.css'
+        'shield/css/icomoon.css'
+        filter='cssrewrite' output='css/compiled/app.css' %}
+        <link rel="stylesheet" href="{{ asset_url }}"/>
+    {% endstylesheets %}
+</head>
+<body data-spy="scroll" data-offset="0" data-target="#navbar-main">
+
+
+<div id="navbar-main">
+    <!-- Fixed navbar -->
+    <div class="navbar navbar-inverse navbar-fixed-top">
+        <div class="container">
+            <div class="login-bar pull-right">
+                {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
+                    {{ 'layout.logged_in_as'|trans({'%username%': app.user.username}, 'FOSUserBundle') }} |
+                    <a href="{{ path('fos_user_security_logout') }}">
+                        {{ 'layout.logout'|trans({}, 'FOSUserBundle') }}
+                    </a>
+                {% else %}
+                    {% block fos_user_content_login %}{% endblock %}
+                {% endif %}
+            </div>
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="icon icon-shield" style="font-size:30px; color:#3498db;"></span>
+                </button>
+                <a class="navbar-brand hidden-xs hidden-sm" href="#home"><span class="icon icon-shield"
+                                                                               style="font-size:18px; color:#3498db;"></span></a>
+            </div>
+            <div class="navbar-collapse collapse">
+                <ul class="nav navbar-nav">
+                    <li><a href="#home" class="smoothScroll">Home</a></li>
+                    {% if is_granted("ROLE_ADMIN") %}
+                    <li><a href="{{ path('admin_user_index') }}" >Barberzy</a></li>
+                    {#<li><a href="#services" class="smoothScroll"> Services</a></li>#}
+                    {#<li><a href="#team" class="smoothScroll"> Team</a></li>#}
+                    {#<li><a href="#portfolio" class="smoothScroll"> Portfolio</a></li>#}
+                    {#<li><a href="#blog" class="smoothScroll"> Blog</a></li>#}
+                    {#<li><a href="#contact" class="smoothScroll"> Contact</a></li>#}
+                    {% endif %}
+            </div><!--/.nav-collapse -->
+
+        </div>
+    </div>
+</div>
+
+{% for type, messages in app.session.flashBag.all %}
+    {% for message in messages %}
+        <div class="{{ type }}">
+            {{ message|trans({}, 'FOSUserBundle') }}
+        </div>
+    {% endfor %}
+{% endfor %}
+
+<!-- ==== ABOUT ==== -->
+<div class="container" id="about" name="about">
+    <div class="row white col-xs-12 ">
+        {% block fos_user_content %}
+        {% endblock fos_user_content %}
+
+            <br/>
+            <br/>
+        {% block body %}
+            <img class="img-centered" src="{{ asset('images/logo.jpg') }}"/>
+            <br/>
+            <h1 class="centered">BARBEROWA APLIKACJA PSEUDOMATEMATYCZNA</h1>
+            <hr/>
+            <div class="col-lg-6">
+                <p>&nbsp;</p>
+            </div><!-- col-lg-6 -->
+
+            <div class="col-lg-6">
+                <p>&nbsp;</p>
+            </div><!-- col-lg-6 -->
+        {% endblock %}
+
+
+    </div><!-- row -->
+</div><!-- container -->
+
+{% block javascripts %}{% endblock %}
+</body>
+</html>
