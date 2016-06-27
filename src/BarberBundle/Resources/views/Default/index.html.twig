@@ -1,1 +1,15 @@
 {% extends 'layout.html.twig' %}
+
+{% block body %}
+    <div class="row">
+        {% for user in users %}
+            <div class="col-xs-4 centered">
+            <h2>{{ user.username|capitalize }}</h2>
+            {% for service in services %}
+                <a href="{{ path('barber_customerservice_create', {'service': service.id, 'user': user.id}) }}" class="btn btn-success btn-lg">{{ service.name }} : {{ service.price }} PLN</a>
+                <hr/>
+            {% endfor %}
+            </div>
+        {% endfor %}
+    </div>
+{% endblock %}

@@ -73,6 +73,7 @@ class UserController extends Controller
 
             $userManager->updateUser($user);
 
+            $this->addFlash('info', 'User is saved');
             if (null === $response = $event->getResponse()) {
                 return $this->redirectToRoute('admin_user_index');
             }
@@ -117,6 +118,8 @@ class UserController extends Controller
             $em = $this->getDoctrine()->getManager();
             $em->persist($user);
             $em->flush();
+
+            $this->addFlash('info', 'User is saved');
 
             return $this->redirectToRoute('admin_user_edit', array('id' => $user->getId()));
         }

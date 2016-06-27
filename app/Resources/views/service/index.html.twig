@@ -1,0 +1,37 @@
+{% extends 'layout.html.twig' %}
+
+{% block body %}
+    <h1 class="centered">{{ 'SERVICES'|trans }}</h1>
+    <hr/>
+    <br/>
+
+    {% if services %}
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>{{ 'Name'|trans }}</th>
+                    <th>{{ 'Current price'|trans }}</th>
+                    <th>{{ 'Enabled'|trans }}</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+            {% for service in services %}
+                <tr>
+                    <td>{{ service.name }}</td>
+                    <td>{{ service.price }}</td>
+                    <td>{% if service.enabled %}{{ 'Yes'|trans }}{% else %}{{ 'No'|trans }}{% endif %}</td>
+                    <td>
+                        <a class="btn btn-info" href="{{ path('admin_service_show', { 'id': service.id }) }}">{{ 'details'|trans }}</a>
+                        <a class="btn btn-success" href="{{ path('admin_service_edit', { 'id': service.id }) }}">{{ 'edit'|trans }}</a>
+                    </td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    {% else %}
+        <p>{{ 'You haven\'t added any service yet' }}</p>
+    {% endif %}
+
+    <a class="btn btn-success pull-right" href="{{ path('admin_service_new') }}">{{ 'Create a new service'|trans }}</a>
+{% endblock %}

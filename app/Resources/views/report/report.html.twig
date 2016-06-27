@@ -1,0 +1,31 @@
+{% extends 'layout.html.twig' %}
+{% form_theme searchForm 'bootstrap_3_horizontal_layout.html.twig' %}
+{% block body %}
+    <h1 class="centered">{{ 'REPORT'|trans }}</h1>
+    <hr/>
+    <br/>
+
+    {{ form_start(searchForm) }}
+    {{ form_widget(searchForm) }}
+    <input class="btn btn-success pull-right" type="submit" value="{{ 'search'|trans }}"/>
+    {{ form_end(searchForm) }}
+
+    <br style="clear:both;"/>
+    <br style="clear:both;"/>
+    <table class="table">
+        {% for item in reportItems %}
+            <tr>
+                <td>{{ item.user.username }}</td>
+                <td>{{ item.service.name }}</td>
+                <td>{{ item.createdAt|date('Y-m-d H:i:s') }}</td>
+                <td>{{ item.price|price }}</td>
+            </tr>
+        {% endfor %}
+        <tr>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td><b>{{ reportItems|sum('getPrice')|price }}</b></td>
+        </tr>
+    </table>
+{% endblock %}

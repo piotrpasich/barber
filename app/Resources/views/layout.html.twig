@@ -2,7 +2,8 @@
 <html>
 <head>
     <meta charset="UTF-8"/>
-    <title>{% block title %}Barberownia!{% endblock %}</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>{% block title %}{{ 'BarberShop!'|trans }}{% endblock %}</title>
     {% block stylesheets %}{% endblock %}
     <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}"/>
     {% javascripts '@twbs_js_and_jq' %}
@@ -48,14 +49,11 @@
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
-                    <li><a href="#home" class="smoothScroll">Home</a></li>
+                    <li><a href="{{ path('barber_default_index') }}">Home</a></li>
                     {% if is_granted("ROLE_ADMIN") %}
-                    <li><a href="{{ path('admin_user_index') }}" >Barberzy</a></li>
-                    {#<li><a href="#services" class="smoothScroll"> Services</a></li>#}
-                    {#<li><a href="#team" class="smoothScroll"> Team</a></li>#}
-                    {#<li><a href="#portfolio" class="smoothScroll"> Portfolio</a></li>#}
-                    {#<li><a href="#blog" class="smoothScroll"> Blog</a></li>#}
-                    {#<li><a href="#contact" class="smoothScroll"> Contact</a></li>#}
+                    <li><a href="{{ path('admin_user_index') }}" >{{ 'Stuff'|trans }}</a></li>
+                    <li><a href="{{ path('admin_service_index') }}">{{ 'Services'|trans }}</a></li>
+                    <li><a href="{{ path('barber_report_report', {'timePeriod': 'today'}) }}">{{ 'Reports'|trans }}</a></li>
                     {% endif %}
             </div><!--/.nav-collapse -->
 
@@ -63,26 +61,25 @@
     </div>
 </div>
 
-{% for type, messages in app.session.flashBag.all %}
-    {% for message in messages %}
-        <div class="{{ type }}">
-            {{ message|trans({}, 'FOSUserBundle') }}
-        </div>
+<div class="messages">
+    {% for type, messages in app.session.flashBag.all %}
+        {% for message in messages %}
+            <div class="btn message btn-{{ type }} disabled">
+                {{ message|trans({}) }}
+            </div>
+        {% endfor %}
     {% endfor %}
-{% endfor %}
+</div>
 
 <!-- ==== ABOUT ==== -->
 <div class="container" id="about" name="about">
     <div class="row white col-xs-12 ">
         {% block fos_user_content %}
         {% endblock fos_user_content %}
-
-            <br/>
-            <br/>
         {% block body %}
             <img class="img-centered" src="{{ asset('images/logo.jpg') }}"/>
             <br/>
-            <h1 class="centered">BARBEROWA APLIKACJA PSEUDOMATEMATYCZNA</h1>
+            <h1 class="centered">{{ 'app description'|trans }}</h1>
             <hr/>
             <div class="col-lg-6">
                 <p>&nbsp;</p>

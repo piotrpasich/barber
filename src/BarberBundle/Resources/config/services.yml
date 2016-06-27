@@ -1,1 +1,34 @@
 services:
+    barber.service.created_listener:
+        class: BarberBundle\EventListener\ServiceCreatedEventListener
+        arguments:
+            - @barber.service.builder
+            - @barber.service_repository
+        tags:
+            - { name: kernel.event_listener, event: barber.service.created, method : created}
+
+    barber.service.builder:
+        class: BarberBundle\Builder\ServiceBuilder
+
+    barber.service_repository:
+          class: Doctrine\ORM\EntityRepository
+          factory_service: doctrine.orm.default_entity_manager
+          factory_method: getRepository
+          arguments:
+              - BarberBundle\Entity\Service
+
+    barber.twig.price:
+          class: BarberBundle\Twig\PriceExtension
+          public: false
+          tags:
+              - { name: twig.extension }
+
+    barber.twig.sum:
+          class: BarberBundle\Twig\SumExtension
+          public: false
+          tags:
+              - { name: twig.extension }
+    barber.param_converter.time_period:
+        class: BarberBundle\Request\ParamConverter\TimePeriodParamConverter
+        tags:
+            - { name: request.param_converter, priority: -2, converter: time_period_converter }

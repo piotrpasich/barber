@@ -1,0 +1,24 @@
+details: __details
+save: __save
+'ADD SERVICE': '__ADD SERVICE'
+'EDIT A BARBER': '__EDIT A BARBER'
+'app description': 'BARBEROWA APLIKACJA PSEUDOMATEMATYCZNA'
+Stuff: __Stuff
+Services: __Services
+BarberShop!: __BarberShop!
+SERVICES: __SERVICES
+Name: __Name
+'Current price': '__Current price'
+Enabled: __Enabled
+'Yes': __Yes
+'No': __No
+edit: __edit
+'Create a new service': '__Create a new service'
+'Back to the list': '__Back to the list'
+STUFF: __STUFF
+Barber: __Barber
+Disabled: __Disabled
+'Add a stuff member': '__Add a stuff member'
+Save: __Save
+'Lock access': '__Lock access'
+'User creation': '__User creation'

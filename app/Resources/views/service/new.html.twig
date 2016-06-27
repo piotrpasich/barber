@@ -1,0 +1,15 @@
+{% extends 'layout.html.twig' %}
+{% form_theme form 'bootstrap_3_horizontal_layout.html.twig' %}
+{% block body %}
+    <h1 class="centered">{{ 'ADD SERVICE'|trans }}</h1>
+    <hr/>
+    <br/>
+
+    {{ form_start(form) }}
+        {{ form_widget(form) }}
+        <input class="btn btn-success pull-right m-l-1"  type="submit" value="{{ 'save'|trans }}"/>
+    {{ form_end(form) }}
+
+    <a class="btn btn-info pull-right m-l-1" href="{{ path('admin_service_index') }}">{{ 'Back to the list'|trans }}</a>
+
+{% endblock %}

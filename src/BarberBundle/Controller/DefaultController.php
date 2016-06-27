@@ -4,17 +4,27 @@ namespace BarberBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 
 class DefaultController extends Controller
 {
     /**
      * @Route("/")
+     * @Template("BarberBundle:Default:index.html.twig")
      */
     public function indexAction()
     {
         if ( ! $this->container->get('security.authorization_checker')->isGranted('IS_AUTHENTICATED_FULLY')) {
             return $this->redirectToRoute('fos_user_security_login');
         }
-        return $this->render('BarberBundle:Default:index.html.twig');
+
+        $em = $this->getDoctrine()->getManager();
+        $services = $em->getRepository('BarberBundle:Service')->findAll();
+        $users = $em->getRepository('BarberBundle:User')->findAll();
+
+        return [
+            'services' => $services,
+            'users' => $users
+        ];
     }
 }
