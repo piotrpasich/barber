@@ -25,4 +25,9 @@ class MonthlyPeriod implements TimePeriod
     {
         return new DateTime('first last of this month');
     }
+
+    public function __toString()
+    {
+        return 'Monthly';
+    }
 }

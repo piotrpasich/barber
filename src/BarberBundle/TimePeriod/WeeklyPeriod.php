@@ -4,12 +4,12 @@ namespace BarberBundle\TimePeriod;
 
 use DateTime;
 
-class TodaysPeriod implements TimePeriod
+class WeeklyPeriod implements TimePeriod
 {
 
     public function getStartDate()
     {
-        return new DateTime('today 00:00:00');
+        return new DateTime('last monday 00:00:00');
     }
 
     public function getEndDate()
@@ -19,6 +19,6 @@ class TodaysPeriod implements TimePeriod
 
     public function __toString()
     {
-        return 'Todays';
+        return 'Weekly';
     }
 }
