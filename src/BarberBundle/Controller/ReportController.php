@@ -20,12 +20,7 @@ use Symfony\Component\HttpFoundation\Request;
 class ReportController extends Controller
 {
     /**
-     * @Route("/admin/report/{timePeriod}")
-     * @Route("/admin/report/{timePeriod}/service/{service}")
-     * @Route("/admin/report/{timePeriod}/user/{user}")
-     * @Route("/admin/report/{timePeriod}/user/{user}/service/{service}")
-     * @Route("/admin/report/user/{user}")
-     * @Route("/admin/report/user/{user}/service/{service}")
+     * @Route("/admin/report")
      * @Template("report/report.html.twig")
      * @TimePeriodParamConverter();
      * @UserParamConverter();

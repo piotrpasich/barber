@@ -53,7 +53,7 @@
                     {% if is_granted("ROLE_ADMIN") %}
                     <li><a href="{{ path('admin_user_index') }}" >{{ 'Stuff'|trans }}</a></li>
                     <li><a href="{{ path('admin_service_index') }}">{{ 'Services'|trans }}</a></li>
-                    <li><a href="{{ path('barber_report_report', {'timePeriod': 'today'}) }}">{{ 'Reports'|trans }}</a></li>
+                    <li><a href="{{ path('barber_report_report', {'timePeriod': 'Todays'}) }}">{{ 'Reports'|trans }}</a></li>
                     {% endif %}
             </div><!--/.nav-collapse -->
 

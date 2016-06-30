@@ -14,7 +14,6 @@
 
     {% if user.enabled %}
         {{ form_start(delete_form) }}
-        <input class="btn btn-danger pull-right m-l-1" type="submit" value="{{ 'Lock access'|trans }}">
         {{ form_end(delete_form) }}
     {% endif %}
 {% endblock %}

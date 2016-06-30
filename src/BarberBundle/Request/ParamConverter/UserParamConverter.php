@@ -34,6 +34,10 @@ class UserParamConverter extends AbstractParamConverter
             return false;
         }
 
+        if (is_array($userId)) {
+            $userId = $request->get('id');
+        }
+
         $user = $this->userRepository->find($userId);
 
         $request->attributes->set($this->parameterName, $user);

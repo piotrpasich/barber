@@ -116,6 +116,12 @@ class UserController extends Controller
 
         if ($editForm->isSubmitted() && $editForm->isValid()) {
             $em = $this->getDoctrine()->getManager();
+
+            if (0 !== strlen($password = $user->getPlainPassword())) {
+                $userManager = $this->get('fos_user.user_manager');
+                $userManager->updateUser($user);
+            }
+
             $em->persist($user);
             $em->flush();
 

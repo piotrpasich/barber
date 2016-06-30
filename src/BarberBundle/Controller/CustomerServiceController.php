@@ -12,7 +12,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 class CustomerServiceController extends Controller
 {
     /**
-     * @Route("/admin/create/{service}/{user}")
+     * @Route("/customerservice/create/{service}/{user}")
      * @ParamConverter("service", class="BarberBundle:Service")
      * @ParamConverter("user", class="BarberBundle:User")
      */
