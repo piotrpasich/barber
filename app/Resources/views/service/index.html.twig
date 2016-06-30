@@ -22,7 +22,7 @@
                     <td>{{ service.price }}</td>
                     <td>{% if service.enabled %}{{ 'Yes'|trans }}{% else %}{{ 'No'|trans }}{% endif %}</td>
                     <td>
-                        <a class="btn btn-info" href="{{ path('admin_service_show', { 'id': service.id }) }}">{{ 'details'|trans }}</a>
+                        <a class="btn btn-info" href="{{ path('barber_report_report', {'service': service.id}) }}">{{ 'details'|trans }}</a>
                         <a class="btn btn-success" href="{{ path('admin_service_edit', { 'id': service.id }) }}">{{ 'edit'|trans }}</a>
                     </td>
                 </tr>

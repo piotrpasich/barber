@@ -1,24 +1,37 @@
-details: __details
-save: __save
-'ADD SERVICE': '__ADD SERVICE'
-'EDIT A BARBER': '__EDIT A BARBER'
+details: Szczegóły
+save: Zapisz
+'ADD SERVICE': 'DODAJ USŁUGĘ'
+'EDIT A BARBER': 'EDYCJA BARBERA'
 'app description': 'BARBEROWA APLIKACJA PSEUDOMATEMATYCZNA'
-Stuff: __Stuff
-Services: __Services
-BarberShop!: __BarberShop!
-SERVICES: __SERVICES
-Name: __Name
-'Current price': '__Current price'
-Enabled: __Enabled
-'Yes': __Yes
-'No': __No
-edit: __edit
-'Create a new service': '__Create a new service'
-'Back to the list': '__Back to the list'
-STUFF: __STUFF
-Barber: __Barber
-Disabled: __Disabled
-'Add a stuff member': '__Add a stuff member'
-Save: __Save
-'Lock access': '__Lock access'
-'User creation': '__User creation'
+Stuff: Barberzy
+Services: Usługi
+BarberShop!: BarberShop!
+SERVICES: USŁUGI
+Name: Nazwa
+'Current price': Cena
+Enabled: Aktywny
+'Yes': Tak
+'No': Nie
+edit: Edycja
+'Create a new service': 'Dodaj usługę'
+'Back to the list': 'Powrót do listy'
+STUFF: BARBERZY
+Barber: Barber
+Disabled: Nieaktywny
+'Add a stuff member': 'Dodaj Barbera'
+Save: Zapisz
+'Lock access': 'Zablokuj dostęp'
+'User creation': 'Dodaj Barbera'
+REPORT: __REPORT
+search: __search
+Reports: Raporty
+'EDIT SERVICE': 'EDYCJA USŁUGI'
+Delete: Usuń
+Service: Usługa
+'Time period': 'Zakres dat'
+Todays: Dzisiaj
+Monthly: 'Ten miesiąc'
+Weekly: 'Ten tydzień'
+All: Wszystko
+Price: Cena
+

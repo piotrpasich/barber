@@ -1,21 +1,18 @@
 {% extends 'layout.html.twig' %}
 {% form_theme edit_form 'bootstrap_3_horizontal_layout.html.twig' %}
 {% block body %}
-    <h1>Edytuj usługę</h1>
+    <h1 class="centered">{{ 'EDIT SERVICE'|trans }}</h1>
+    <hr/>
+    <br/>
+
 
     {{ form_start(edit_form) }}
-        {{ form_widget(edit_form) }}
-        <input type="submit" value="{{ 'save'|trans }}" />
+    {{ form_widget(edit_form) }}
+    <input class="btn btn-success pull-right m-l-1"  type="submit" value="{{ 'Save'|trans }}"/>
     {{ form_end(edit_form) }}
 
-    <ul>
-        <li>
-            <a href="{{ path('admin_service_index') }}">Back to the list</a>
-        </li>
-        <li>
-            {{ form_start(delete_form) }}
-                <input type="submit" value="Delete">
-            {{ form_end(delete_form) }}
-        </li>
-    </ul>
+    <a class="btn btn-info pull-right m-l-1" href="{{ path('admin_service_index') }}">{{ 'Back to the list'|trans }}</a>
+    {{ form_start(delete_form) }}
+    <input class="btn btn-danger pull-right m-l-1" type="submit" value="{{ 'Delete'|trans }}">
+    {{ form_end(delete_form) }}
 {% endblock %}

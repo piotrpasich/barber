@@ -34,6 +34,10 @@ class ServiceParamConverter extends AbstractParamConverter
             return false;
         }
 
+        if (is_array($serviceId)) {
+            $serviceId = $request->get('id');
+        }
+
         $user = $this->serviceRepository->find($serviceId);
 
         $request->attributes->set($this->parameterName, $user);

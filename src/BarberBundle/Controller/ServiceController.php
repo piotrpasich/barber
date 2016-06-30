@@ -46,7 +46,7 @@ class ServiceController extends Controller
     public function newAction(Request $request)
     {
         $service = new ServiceEvent($this->getUser());
-        $form = $this->createForm('BarberBundle\Form\ServiceType', $service);
+        $form = $this->createForm('BarberBundle\Form\ServiceEventType', $service);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
