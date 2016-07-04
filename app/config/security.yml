@@ -13,6 +13,12 @@ security:
 
     firewalls:
         main:
+            remember_me:
+                secret: '%secret%'
+                lifetime: 604800000
+                path: /
+                always_remember_me: true
+
             pattern: ^/
             form_login:
                 provider: fos_userbundle
