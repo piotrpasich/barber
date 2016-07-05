@@ -22,8 +22,8 @@ Disabled: Nieaktywny
 Save: Zapisz
 'Lock access': 'Zablokuj dostęp'
 'User creation': 'Dodaj Barbera'
-REPORT: __REPORT
-search: __search
+REPORT: RAPORTY
+search: Szukaj
 Reports: Raporty
 'EDIT SERVICE': 'EDYCJA USŁUGI'
 Delete: Usuń
@@ -35,3 +35,4 @@ Weekly: 'Ten tydzień'
 All: Wszystko
 Price: Cena
 Service is saved: Zapisano
+__search: Szukaj

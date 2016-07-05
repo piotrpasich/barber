@@ -8,6 +8,7 @@ use BarberBundle\Entity\User;
 use BarberBundle\Report\QueryFilter\ServiceFilter;
 use BarberBundle\Report\QueryFilter\TimePeriodFilter;
 use BarberBundle\Report\QueryFilter\UserFilter;
+use BarberBundle\Response\ReportCsvResponse;
 use BarberBundle\TimePeriod\TimePeriod;
 use BarberBundle\TimePeriod\TodaysPeriod;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -21,7 +22,11 @@ use Symfony\Component\HttpFoundation\Request;
 class ReportController extends Controller
 {
     /**
-     * @Route("/admin/report")
+     * @Route("/admin/report.{_format}",
+     *     defaults={"_format": "html"},
+     *     requirements={
+     *         "_format": "html|csv",
+     *     })
      * @Template("report/report.html.twig")
      * @TimePeriodParamConverter();
      * @UserParamConverter();
@@ -37,10 +42,16 @@ class ReportController extends Controller
 
         $reportItems = $customerServiceRepository->getByFilters($user, $timePeriod, $service);
 
-        return [
-            'reportItems' => $reportItems,
-            'searchForm' => $searchForm->createView()
-        ];
+        switch ($request->get('_format')) {
+            case 'csv':
+                return new ReportCsvResponse($reportItems);
+                break;
+            default:
+                return [
+                    'reportItems' => $reportItems,
+                    'searchForm' => $searchForm->createView()
+                ];
+        }
     }
 
     /**
@@ -60,7 +71,7 @@ class ReportController extends Controller
         $reportItems = $customerServiceRepository->getByFilters($user, $timePeriod, null);
 
         return [
-            'sum' => array_reduce($reportItems, function($sum, CustomerService $customerService) {
+            'sum' => array_reduce($reportItems, function ($sum, CustomerService $customerService) {
                 return $sum += $customerService->getPrice();
             })
         ];
