@@ -2,6 +2,7 @@
 
 namespace BarberBundle\Controller;
 
+use BarberBundle\Entity\CustomerService;
 use BarberBundle\Entity\Service;
 use BarberBundle\Entity\User;
 use BarberBundle\Report\QueryFilter\ServiceFilter;
@@ -34,25 +35,34 @@ class ReportController extends Controller
 
         $searchForm->handleRequest($request);
 
-        $filter = null;
-
-        if (null != $timePeriod) {
-            $filter = new TimePeriodFilter($timePeriod, $filter);
-        }
-
-        if (null != $user) {
-            $filter = new UserFilter($user, $filter);
-        }
-
-        if (null != $service) {
-            $filter = new ServiceFilter($service, $filter);
-        }
-
-        $reportItems = $customerServiceRepository->getByFilters($filter);
+        $reportItems = $customerServiceRepository->getByFilters($user, $timePeriod, $service);
 
         return [
             'reportItems' => $reportItems,
             'searchForm' => $searchForm->createView()
+        ];
+    }
+
+    /**
+     * @Template("report/user_summary.html.twig")
+     * @TimePeriodParamConverter();
+     * @UserParamConverter();
+     * @ServiceParamConverter();
+     */
+    public function userSummaryAction(User $user, TimePeriod $timePeriod = null)
+    {
+        if (null === $timePeriod) {
+            $timePeriod = new TodaysPeriod();
+        }
+
+        $customerServiceRepository = $this->getDoctrine()->getRepository('BarberBundle:CustomerService');
+
+        $reportItems = $customerServiceRepository->getByFilters($user, $timePeriod, null);
+
+        return [
+            'sum' => array_reduce($reportItems, function($sum, CustomerService $customerService) {
+                return $sum += $customerService->getPrice();
+            })
         ];
     }
 }

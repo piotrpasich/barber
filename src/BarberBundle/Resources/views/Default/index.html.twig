@@ -15,6 +15,7 @@
                     {% endif %}
                     <hr/>
                 {% endfor %}
+                {{ render(controller('BarberBundle:Report:userSummary', {'user': user})) }}
             </div>
         {% endfor %}
     </div>
