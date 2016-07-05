@@ -24,7 +24,7 @@ class CustomerServiceController extends Controller
             $this->denyAccessUnlessGranted('ROLE_ADMIN', null, 'Unable to access this page!');
         }
 
-        if (null === $price && $request->attributes->has('price')) {
+        if (null === $price && $request->query->has('price')) {
             $price = (int)$request->get('price');
         }
 
