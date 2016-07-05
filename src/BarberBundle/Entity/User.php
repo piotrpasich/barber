@@ -19,11 +19,16 @@ class User extends BaseUser
      * @ORM\GeneratedValue(strategy="AUTO")
      */
     protected $id;
+    /**
+     * @ORM\Column(type="boolean")
+     */
+    protected $visible;
+
 
     public function __construct()
     {
         parent::__construct();
-        // your own logic
+        $this->visible = true;
     }
 
     /**
@@ -34,5 +39,21 @@ class User extends BaseUser
     public function getId()
     {
         return $this->id;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getVisible()
+    {
+        return $this->visible;
+    }
+
+    /**
+     * @param mixed $visible
+     */
+    public function setVisible($visible)
+    {
+        $this->visible = $visible;
     }
 }
