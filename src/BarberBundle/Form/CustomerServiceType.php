@@ -1,0 +1,37 @@
+<?php
+
+namespace BarberBundle\Form;
+
+use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Component\OptionsResolver\OptionsResolver;
+
+class CustomerServiceType extends AbstractType
+{
+    /**
+     * @param FormBuilderInterface $builder
+     * @param array $options
+     */
+    public function buildForm(FormBuilderInterface $builder, array $options)
+    {
+        $builder
+            ->add('price', null, [
+//                'placeholder' => 'Price',
+                'label' => ' ',
+                'attr' => [
+                    'style' => 'width:50%;float:left;'
+                ]
+            ])
+        ;
+    }
+    
+    /**
+     * @param OptionsResolver $resolver
+     */
+    public function configureOptions(OptionsResolver $resolver)
+    {
+        $resolver->setDefaults(array(
+            'data_class' => 'BarberBundle\Entity\CustomerService'
+        ));
+    }
+}

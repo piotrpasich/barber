@@ -4,11 +4,17 @@
     <div class="row">
         {% for user in users %}
             <div class="col-xs-4 centered">
-            <h2>{{ user.username|capitalize }}</h2>
-            {% for service in services %}
-                <a onclick="return confirm('Na pewno chcesz dodac ta usluge?');" href="{{ path('barber_customerservice_create', {'service': service.id, 'user': user.id}) }}" class="btn btn-success btn-lg">{{ service.name }} : {{ service.price }} PLN</a>
-                <hr/>
-            {% endfor %}
+                <h2>{{ user.username|capitalize }}</h2>
+                {% for service in services %}
+                    {% if service.price != -1 %}
+                        <a onclick="return confirm('Na pewno chcesz dodac ta usluge?');"
+                           href="{{ path('barber_customerservice_create', {'service': service.id, 'user': user.id}) }}"
+                           class="btn btn-success btn-lg">{{ service.name }} : {{ service.price }} PLN</a>
+                    {% else %}
+                        {{ render(controller('BarberBundle:CustomerService:form', {'service': service, 'user': user})) }}
+                    {% endif %}
+                    <hr/>
+                {% endfor %}
             </div>
         {% endfor %}
     </div>

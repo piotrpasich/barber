@@ -1,0 +1,5 @@
+{{ form_start(form, {'action': path('barber_customerservice_form', {'service': service.id, 'user': user.id})}) }}
+<input class="btn btn-success pull-right m-l-1" type="submit" value="{{ 'save'|trans }}" onclick="return confirm('Na pewno chcesz dodac ta usluge?');"/>
+{{ form_widget(form) }}
+<br/>
+{{ form_end(form) }}

@@ -3,6 +3,7 @@
 namespace BarberBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * CustomerServiced
@@ -32,6 +33,7 @@ class CustomerService
      * @var int
      *
      * @ORM\Column(name="price", type="integer")
+     * @Assert\NotBlank()
      */
     private $price;
 
@@ -52,9 +54,10 @@ class CustomerService
 
     public function __construct(User $user, Service $service, $price = null)
     {
-        if (null == $price) {
-            $this->price = $service->getPrice();
+        if (null === $price) {
+            $price = $service->getPrice();
         }
+        $this->price = $price;
         $this->user = $user;
         $this->service = $service;
         $this->setCreatedAtValue();
@@ -117,4 +120,13 @@ class CustomerService
     {
         $this->createdAt = new \DateTime();
     }
+
+    /**
+     * @param int $price
+     */
+    public function setPrice($price)
+    {
+        $this->price = $price;
+    }
+
 }
