@@ -3,7 +3,7 @@
 {% block body %}
     <div class="row">
         {% for user in users %}
-            <div class="col-xs-4 centered">
+            <div class="col-lg-4 centered">
                 <h2>{{ user.username|capitalize }}</h2>
                 {% for service in services %}
                     {% if service.price != -1 %}
