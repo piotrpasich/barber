@@ -34,8 +34,15 @@ class ReportController extends Controller
      */
     public function reportAction(Request $request, User $user = null, TimePeriod $timePeriod = null, Service $service = null)
     {
-        $searchForm = $this->createForm('BarberBundle\Form\ReportSearchType', []);
+        $searchForm = $this->createForm('BarberBundle\Form\ReportSearchType', [
+            'timePeriodFrom' => new \DateTime(),
+            'timePeriodTo' => new \DateTime(),
+        ]);
 
+        if (null == $timePeriod) {
+            $timePeriod = new TodaysPeriod();
+        }
+        
         $customerServiceRepository = $this->getDoctrine()->getRepository('BarberBundle:CustomerService');
 
         $searchForm->handleRequest($request);

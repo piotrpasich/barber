@@ -5,6 +5,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>{% block title %}{{ 'BarberShop!'|trans }}{% endblock %}</title>
     {% block stylesheets %}{% endblock %}
+
+
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
+    <script src="//code.jquery.com/jquery-1.10.2.js"></script>
+    <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+
     <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}"/>
     {% javascripts '@twbs_js_and_jq' %}
     <script src="{{ asset_url }}"></script>
@@ -53,7 +59,7 @@
                     {% if is_granted("ROLE_ADMIN") %}
                     <li><a href="{{ path('admin_user_index') }}" >{{ 'Stuff'|trans }}</a></li>
                     <li><a href="{{ path('admin_service_index') }}">{{ 'Services'|trans }}</a></li>
-                    <li><a href="{{ path('barber_report_report', {'timePeriod': 'Todays'}) }}">{{ 'Reports'|trans }}</a></li>
+                    <li><a href="{{ path('barber_report_report') }}">{{ 'Reports'|trans }}</a></li>
                     {% endif %}
             </div><!--/.nav-collapse -->
 

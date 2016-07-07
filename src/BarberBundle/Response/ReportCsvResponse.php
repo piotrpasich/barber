@@ -15,6 +15,7 @@ class ReportCsvResponse extends Response
             return implode(';', [
                 $customerService->getUser()->getUsername(),
                 $customerService->getService()->getName(),
+                $customerService->getPrice(),
                 $customerService->getCreatedAt()->format('Y-m-d H:i:s')
             ]);
         } , $reportItems));

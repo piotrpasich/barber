@@ -15,11 +15,13 @@ abstract class AbstractParamConverter implements ParamConverterInterface
 {
     protected $parameterName;
 
-    protected function getParameter(Request $request)
+    protected function getParameter(Request $request, $parameterName = null)
     {
+        $parameterName = (null == $parameterName) ? $this->parameterName : $parameterName;
+
         foreach (['query', 'request', 'attributes'] as $field) {
-            if ($request->{$field}->has($this->parameterName)) {
-                return $request->{$field}->get($this->parameterName);
+            if ($request->{$field}->has($parameterName)) {
+                return $request->{$field}->get($parameterName);
             }
         }
 

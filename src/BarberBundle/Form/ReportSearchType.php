@@ -7,6 +7,7 @@ use BarberBundle\TimePeriod\TimePeriodCollection;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -33,11 +34,15 @@ class ReportSearchType extends AbstractType
                 'placeholder' => 'All',
                 'required' => false,
             ])
-            ->add('timePeriod', ChoiceType::class, [
-                'choices' => (new TimePeriodCollection())->toArray(),
-                'placeholder' => 'All',
-                'required' => false,
-            ]);
+            ->add('timePeriodFrom', DateType::class, [
+                'widget' => 'single_text',
+                'format' => 'yyyy-MM-dd',
+            ])
+            ->add('timePeriodTo', DateType::class, [
+                'widget' => 'single_text',
+                'format' => 'yyyy-MM-dd',
+            ])
+        ;
 
     }
 
