@@ -42,7 +42,7 @@ class ReportController extends Controller
         if (null == $timePeriod) {
             $timePeriod = new TodaysPeriod();
         }
-        
+
         $customerServiceRepository = $this->getDoctrine()->getRepository('BarberBundle:CustomerService');
 
         $searchForm->handleRequest($request);
@@ -76,11 +76,11 @@ class ReportController extends Controller
         $customerServiceRepository = $this->getDoctrine()->getRepository('BarberBundle:CustomerService');
 
         $reportItems = $customerServiceRepository->getByFilters($user, $timePeriod, null);
-
         return [
             'sum' => array_reduce($reportItems, function ($sum, CustomerService $customerService) {
                 return $sum += $customerService->getPrice();
-            })
+            }),
+            'count' => count($reportItems)
         ];
     }
 }
