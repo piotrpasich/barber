@@ -33,3 +33,10 @@
     height: 30px;
     margin: 5px 0;
 }
+
+.login-bar-xs {
+    float: left !important;
+}
+.login-bar-xs input {
+    width: 100%;
+}
