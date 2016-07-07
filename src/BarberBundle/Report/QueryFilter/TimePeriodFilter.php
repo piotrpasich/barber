@@ -30,8 +30,8 @@ class TimePeriodFilter implements QueryFilter
 
         $queryBuilder
             ->andWhere('cs.createdAt BETWEEN :startDate AND :endDate')
-            ->setParameter('startDate', $this->timePeriod->getStartDate()->format('Y-m-d H:i:s'))
-            ->setParameter('endDate', $this->timePeriod->getEndDate()->format('Y-m-d H:i:s'));
+            ->setParameter('startDate', $this->timePeriod->getStartDate()->format('Y-m-d 00:00:01'))
+            ->setParameter('endDate', $this->timePeriod->getEndDate()->format('Y-m-d 23:59:59'));
 
         return $queryBuilder;
     }
