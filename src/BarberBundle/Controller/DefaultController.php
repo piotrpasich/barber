@@ -22,7 +22,7 @@ class DefaultController extends Controller
         $em = $this->getDoctrine()->getManager();
         $services = $em->getRepository('BarberBundle:Service')->findAll();
 
-        if ($this->container->get('security.authorization_checker')->isGranted('ROLE_ADMIN')) {
+        if ($this->container->get('security.authorization_checker')->isGranted(['ROLE_ADMIN', 'ROLE_REPORTER'])) {
             $users = $em->getRepository('BarberBundle:User')->findAllVisible();
         } else {
             $users = [$this->getUser()];
