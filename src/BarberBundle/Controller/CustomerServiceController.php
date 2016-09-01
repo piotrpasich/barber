@@ -21,7 +21,7 @@ class CustomerServiceController extends Controller
     public function createAction(Request $request, Service $service, User $user, $price = null)
     {
         if ($this->getUser()->getId() !== $user->getId()) {
-            $this->denyAccessUnlessGranted('ROLE_ADMIN', null, 'Unable to access this page!');
+            $this->denyAccessUnlessGranted('ROLE_REPORTER', null, 'Unable to access this page!');
         }
 
         if (null === $price && $request->query->has('price')) {
