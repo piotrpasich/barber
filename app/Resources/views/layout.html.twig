@@ -5,28 +5,22 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>{% block title %}{{ 'BarberShop!'|trans }}{% endblock %}</title>
     {% block stylesheets %}{% endblock %}
-
-
-    <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
-    <script src="//code.jquery.com/jquery-1.10.2.js"></script>
-    <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
-
     <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}"/>
     {% javascripts '@twbs_js_and_jq' %}
     <script src="{{ asset_url }}"></script>
     {% endjavascripts %}
 
     {% stylesheets
-    '@twbs_css'
-    '@BarberBundle/Resources/public/css/barber.css'
-    filter='cssrewrite' %}
-    <link rel="stylesheet" href="{{ asset_url }}"/>
+        '@twbs_css'
+        '@BarberBundle/Resources/public/css/barber.css'
+        filter='cssrewrite' %}
+        <link rel="stylesheet" href="{{ asset_url }}"/>
     {% endstylesheets %}
     {% stylesheets
-    'shield/css/main.css'
-    'shield/css/icomoon.css'
-    filter='cssrewrite' output='css/compiled/app.css' %}
-    <link rel="stylesheet" href="{{ asset_url }}"/>
+        'shield/css/main.css'
+        'shield/css/icomoon.css'
+        filter='cssrewrite' output='css/compiled/app.css' %}
+        <link rel="stylesheet" href="{{ asset_url }}"/>
     {% endstylesheets %}
 </head>
 <body data-spy="scroll" data-offset="0" data-target="#navbar-main">
@@ -36,44 +30,33 @@
     <!-- Fixed navbar -->
     <div class="navbar navbar-inverse navbar-fixed-top">
         <div class="container">
-
-            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar"
-                    aria-expanded="false" aria-controls="navbar">
-                <span class="sr-only">Toggle navigation</span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-            </button>
-            <div id="navbar" class="navbar-collapse collapse">
+            <div class="login-bar pull-right">
+                {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
+                    {{ 'layout.logged_in_as'|trans({'%username%': app.user.username}, 'FOSUserBundle') }} |
+                    <a href="{{ path('fos_user_security_logout') }}">
+                        {{ 'layout.logout'|trans({}, 'FOSUserBundle') }}
+                    </a>
+                {% else %}
+                    {% block fos_user_content_login %}{% endblock %}
+                {% endif %}
+            </div>
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="icon icon-shield" style="font-size:30px; color:#3498db;"></span>
+                </button>
+                <a class="navbar-brand hidden-xs hidden-sm" href="#home"><span class="icon icon-shield"
+                                                                               style="font-size:18px; color:#3498db;"></span></a>
+            </div>
+            <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
                     <li><a href="{{ path('barber_default_index') }}">Home</a></li>
                     {% if is_granted("ROLE_ADMIN") %}
-                        <li><a href="{{ path('admin_user_index') }}">{{ 'Stuff'|trans }}</a></li>
-                        <li><a href="{{ path('admin_service_index') }}">{{ 'Services'|trans }}</a></li>
-                        <li><a href="{{ path('barber_report_report') }}">{{ 'Reports'|trans }}</a></li>
-                        <li><a class="hidden-lg" href="{{ path('fos_user_security_logout') }}">
-                                {{ 'layout.logout'|trans({}, 'FOSUserBundle') }}
-                            </a></li>
+                    <li><a href="{{ path('admin_user_index') }}" >{{ 'Stuff'|trans }}</a></li>
+                    <li><a href="{{ path('admin_service_index') }}">{{ 'Services'|trans }}</a></li>
+                    <li><a href="{{ path('barber_report_report', {'timePeriod': 'Todays'}) }}">{{ 'Reports'|trans }}</a></li>
                     {% endif %}
-                </ul>
+            </div><!--/.nav-collapse -->
 
-
-
-                <div class="login-bar pull-right visible-lg visible-md visible-sm">
-                    {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
-                        {{ 'layout.logged_in_as'|trans({'%username%': app.user.username}, 'FOSUserBundle') }} |
-                        <a href="{{ path('fos_user_security_logout') }}">
-                            {{ 'layout.logout'|trans({}, 'FOSUserBundle') }}
-                        </a>
-                    {% else %}
-                        {% block fos_user_content_login %}{% endblock %}
-                    {% endif %}
-                </div>
-                <div class="login-bar-xs pull-right visible-xs">
-                    {{ block('fos_user_content_login') }}
-                </div>
-
-            </div>
         </div>
     </div>
 </div>
